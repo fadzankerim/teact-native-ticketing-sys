@@ -4,10 +4,11 @@ import { persist } from "zustand/middleware";
 const useAuthStore = create(
   persist(
     (set) => ({
-      //State
 
+      
+      //State
       user: null,
-      tokern: null,
+      token: null,
       isAuthenticated: null,
       isLoading: null,
       error: null,
