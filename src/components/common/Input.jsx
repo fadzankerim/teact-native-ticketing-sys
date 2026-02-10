@@ -45,12 +45,12 @@ const Input = ({
           disabled={disabled}
           className={`
             w-full px-4 py-2 border rounded-lg 
-            focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent 
-            transition-all duration-200
+            focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary/60 
+            transition-all duration-200 bg-surface
             ${leftIcon ? 'pl-10' : ''}
             ${rightIcon ? 'pr-10' : ''}
             ${error ? 'border-error focus:ring-error' : 'border-border'}
-            ${disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white'}
+            ${disabled ? 'bg-slate-100 cursor-not-allowed' : 'bg-surface'}
           `}
           {...props}
         />

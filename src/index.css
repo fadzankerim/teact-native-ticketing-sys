@@ -1,32 +1,33 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
 
 @theme {
   /* Define your custom colors that are used with @apply */
-  --color-background: #ffffff;
+  --color-background: #f8fafc;
   --color-surface: #ffffff;
-  --color-textPrimary: #111827;
-  --color-textSecondary: #6b7280;
-  --color-border: #e5e7eb;
-  --color-primary: #3b82f6;
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-800: #1e40af;
-  --color-secondary: #8b5cf6;
-  --color-secondary-600: #7c3aed;
-  --color-success: #10b981;
+  --color-textPrimary: #0f172a;
+  --color-textSecondary: #475569;
+  --color-border: #e2e8f0;
+  --color-primary: #4f46e5;
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-800: #3730a3;
+  --color-secondary: #14b8a6;
+  --color-secondary-600: #0d9488;
+  --color-success: #16a34a;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
-  --color-info: #3b82f6;
-  --color-ring-primary: #3b82f6;
-  --color-ring-secondary: #8b5cf6;
+  --color-info: #0ea5e9;
+  --color-ring-primary: #4f46e5;
+  --color-ring-secondary: #14b8a6;
   --color-ring-error: #ef4444;
-  --color-ring-success: #10b981;
+  --color-ring-success: #16a34a;
   
   /* Shadows */
-  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-card-hover: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.06), 0 8px 24px -16px rgb(15 23 42 / 0.35);
+  --shadow-card-hover: 0 12px 32px -20px rgb(15 23 42 / 0.45);
 }
 
 /* Custom scrollbar */
@@ -68,9 +69,7 @@
   
   body {
     @apply bg-background text-textPrimary;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+    font-family: "Plus Jakarta Sans", "Manrope", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -102,6 +101,27 @@
   }
 }
 
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgb(226 232 240 / 0.7) 25%,
+    rgb(248 250 252 / 0.9) 37%,
+    rgb(226 232 240 / 0.7) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
 .animate-slide-in {
   animation: slideIn 0.3s ease-out;
 }
@@ -113,7 +133,7 @@
 /* Component styles using standard Tailwind classes */
 @layer components {
   .card {
-    @apply bg-surface rounded-lg p-6;
+    @apply bg-surface rounded-xl p-6 border border-border/60;
     box-shadow: var(--shadow-card);
   }
 
@@ -126,7 +146,7 @@
   }
 
   .btn {
-    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98];
   }
 
   .btn-primary {
@@ -146,7 +166,7 @@
   }
 
   .btn-outline {
-    @apply border-2 border-primary text-primary focus:ring-primary-500;
+    @apply border border-primary/60 text-primary focus:ring-primary-500;
   }
   
   .btn-outline:hover {
@@ -162,7 +182,7 @@
   }
 
   .input {
-    @apply w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+    @apply w-full px-4 py-2 border border-border/70 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary/60 transition-all duration-200 bg-surface;
   }
 
   .input-error {

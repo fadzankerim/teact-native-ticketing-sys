@@ -41,7 +41,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-background">
       {/* Left side - Decorative */}
       <div className="hidden lg:flex lg:w-3/5 bg-linear-to-br from-primary to-secondary relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -51,12 +51,12 @@ const LoginPage = () => {
         
         <div className="relative z-10 flex flex-col justify-center px-16 text-white">
           <div className="mb-8">
-            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6">
-              <svg className="w-10 h-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-16 h-16 bg-white/15 rounded-2xl flex items-center justify-center mb-6">
+              <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h1 className="text-5xl font-bold mb-4">Welcome to TicketHub</h1>
+            <h1 className="text-5xl font-bold mb-4 tracking-tight">Welcome to TicketHub</h1>
             <p className="text-xl text-white/90">
               Manage your support tickets with AI-powered efficiency
             </p>
@@ -91,10 +91,10 @@ const LoginPage = () => {
       </div>
 
       {/* Right side - Login Form */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-white">
+      <div className="flex-1 flex items-center justify-center p-8 bg-surface">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-textPrimary mb-2">Welcome Back</h2>
+            <h2 className="text-3xl font-bold text-textPrimary mb-2 tracking-tight">Welcome Back</h2>
             <p className="text-textSecondary">Sign in to continue to your account</p>
           </div>
 
@@ -166,8 +166,8 @@ const LoginPage = () => {
           </form>
 
           {/* Demo credentials hint */}
-          <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <p className="text-sm text-blue-800">
+          <div className="mt-8 p-4 bg-primary-50/70 rounded-xl border border-primary-100">
+            <p className="text-sm text-primary-800">
               <strong>Demo:</strong> Use any email and password to login
             </p>
           </div>

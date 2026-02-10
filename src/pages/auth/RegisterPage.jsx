@@ -89,7 +89,7 @@ const RegisterPage = () => {
   return (
     <div className="min-h-screen flex bg-background">
       {/* Left side - Form */}
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 flex items-center justify-center p-8 bg-surface">
         <div className="w-full max-w-md">
           {/* Progress indicator */}
           <div className="mb-8">
@@ -101,7 +101,7 @@ const RegisterPage = () => {
                 Profile Setup
               </span>
             </div>
-            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
               <div 
                 className="h-full bg-primary transition-all duration-300"
                 style={{ width: `${(step / 2) * 100}%` }}
@@ -110,7 +110,7 @@ const RegisterPage = () => {
           </div>
 
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-textPrimary mb-2">Create Account</h2>
+            <h2 className="text-3xl font-bold text-textPrimary mb-2 tracking-tight">Create Account</h2>
             <p className="text-textSecondary">
               {step === 1 ? 'Enter your details to get started' : 'Complete your profile'}
             </p>
@@ -248,7 +248,7 @@ const RegisterPage = () => {
         </div>
         
         <div className="relative z-10 flex flex-col justify-center px-16 text-white">
-          <h2 className="text-4xl font-bold mb-6">Join TicketHub Today</h2>
+          <h2 className="text-4xl font-bold mb-6 tracking-tight">Join TicketHub Today</h2>
           <ul className="space-y-4">
             <li className="flex items-start space-x-3">
               <svg className="w-6 h-6 shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

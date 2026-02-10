@@ -18,6 +18,7 @@ import Button from "../../components/common/Button";
 import Badge from "../../components/common/Badge";
 import Avatar from "../../components/common/Avatar";
 import Dropdown from "../../components/common/Dropdown";
+import Skeleton from "../../components/common/Skeleton";
 import { formatDateTime, formatRelativeTime } from "../../utils/helpers";
 import {
   TICKET_STATUS,
@@ -111,8 +112,46 @@ const TicketDetailPage = () => {
 
   if (isLoading || !currentTicket) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-6 w-48" />
+          <Skeleton className="h-6 w-24" />
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
+            <Card>
+              <div className="space-y-4">
+                <Skeleton className="h-6 w-3/4" />
+                <Skeleton className="h-4 w-1/2" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-5/6" />
+              </div>
+            </Card>
+            <Card title="Activity">
+              <div className="space-y-4">
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <div key={index} className="flex space-x-4">
+                    <Skeleton className="h-10 w-10 rounded-full" />
+                    <div className="flex-1 space-y-2">
+                      <Skeleton className="h-4 w-1/3" />
+                      <Skeleton className="h-4 w-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+          <div className="space-y-6">
+            <Card title="Ticket Details">
+              <div className="space-y-3">
+                <Skeleton className="h-4 w-1/2" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-4 w-1/2" />
+                <Skeleton className="h-10 w-full" />
+              </div>
+            </Card>
+          </div>
+        </div>
       </div>
     );
   }
@@ -156,15 +195,15 @@ const TicketDetailPage = () => {
         <div className="flex items-center space-x-4">
           <button
             onClick={() => navigate("/tickets")}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
           >
             <ArrowLeft className="w-5 h-5 text-textSecondary" />
           </button>
           <div>
             <div className="flex items-center space-x-3 mb-1">
-              <h1 className="text-2xl font-bold text-textPrimary">
-                Ticket #{currentTicket.id}
-              </h1>
+            <h1 className="text-2xl font-bold text-textPrimary tracking-tight">
+              Ticket #{currentTicket.id}
+            </h1>
               <Badge variant={getPriorityColor(currentTicket.priority)}>
                 {TICKET_PRIORITY_LABELS[currentTicket.priority]}
               </Badge>
@@ -216,7 +255,7 @@ const TicketDetailPage = () => {
                     {currentTicket.attachments.map((file, index) => (
                       <div
                         key={index}
-                        className="flex items-center p-3 bg-gray-50 rounded-lg"
+                        className="flex items-center p-3 bg-slate-50 rounded-lg"
                       >
                         <Paperclip className="w-5 h-5 text-textSecondary mr-3" />
                         <span className="text-sm text-textPrimary">
@@ -237,7 +276,7 @@ const TicketDetailPage = () => {
                   <div key={comment.id} className="flex space-x-4">
                     <Avatar name={comment.author} size="md" />
                     <div className="flex-1">
-                      <div className="bg-gray-50 rounded-lg p-4">
+                      <div className="bg-slate-50 rounded-lg p-4">
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center space-x-2">
                             <span className="font-medium text-textPrimary">

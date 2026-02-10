@@ -48,7 +48,7 @@ const Modal = ({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Overlay */}
       <div 
-        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity animate-fade-in"
+        className="fixed inset-0 bg-slate-900/50 transition-opacity animate-fade-in"
         onClick={closeOnOverlayClick ? onClose : undefined}
       />
       
@@ -56,7 +56,7 @@ const Modal = ({
       <div className="flex min-h-full items-center justify-center p-4">
         <div 
           className={`
-            relative bg-white rounded-lg shadow-xl w-full ${sizes[size]}
+            relative bg-surface rounded-2xl shadow-card w-full ${sizes[size]}
             animate-slide-in
           `}
           onClick={(e) => e.stopPropagation()}

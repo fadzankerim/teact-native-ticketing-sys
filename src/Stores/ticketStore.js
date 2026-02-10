@@ -1,5 +1,8 @@
 import { create } from "zustand";
 import { TICKET_STATUS, TICKET_PRIORITY } from "../utils/constants";
+import { storage } from "../utils/helpers";
+
+const persistedKanban = storage.get("kanban-state") || {};
 
 // Mock data
 const mockTickets = [
@@ -72,6 +75,15 @@ const useTicketStore = create((set, get) => ({
   },
   isLoading: false,
   error: null,
+  kanbanOrder: persistedKanban.kanbanOrder || {},
+  wipLimits: persistedKanban.wipLimits || {
+    [TICKET_STATUS.NEW]: 10,
+    [TICKET_STATUS.OPEN]: 12,
+    [TICKET_STATUS.IN_PROGRESS]: 8,
+    [TICKET_STATUS.AWAITING_CUSTOMER]: 6,
+    [TICKET_STATUS.RESOLVED]: 20,
+    [TICKET_STATUS.CLOSED]: 999,
+  },
 
   fetchTickets: async () => {
     set({ isLoading: true, error: null });
@@ -216,13 +228,30 @@ const useTicketStore = create((set, get) => ({
         throw new Error("Ticket not found");
       }
 
+      const prevStatus = mockTickets[ticketIndex].status;
+
       mockTickets[ticketIndex] = {
         ...mockTickets[ticketIndex],
         ...ticketUpdate,
         updatedAt: new Date().toISOString(),
       };
 
-      set((state) => ({
+      set((state) => {
+        const nextOrder = (() => {
+          const order = { ...state.kanbanOrder };
+          const nextStatus = mockTickets[ticketIndex].status;
+          if (!order[prevStatus] || !order[nextStatus]) return order;
+          if (prevStatus !== nextStatus) {
+            order[prevStatus] = order[prevStatus].filter((tid) => tid !== id);
+            order[nextStatus] = [
+              ...order[nextStatus].filter((tid) => tid !== id),
+              id,
+            ];
+          }
+          return order;
+        })();
+        storage.set("kanban-state", { kanbanOrder: nextOrder, wipLimits: state.wipLimits });
+        return {
         tickets: state.tickets.map((t) =>
           t.id === id ? mockTickets[ticketIndex] : t,
         ),
@@ -230,8 +259,10 @@ const useTicketStore = create((set, get) => ({
           state.currentTicket?.id === id
             ? { ...state.currentTicket, ...mockTickets[ticketIndex] }
             : state.currentTicket,
+        kanbanOrder: nextOrder,
         isLoading: false,
-      }));
+      };
+      });
 
       return mockTickets[ticketIndex];
     } catch (error) {
@@ -314,6 +345,49 @@ const useTicketStore = create((set, get) => ({
   clearCurrentTicket: () => set({ currentTicket: null }),
 
   clearError: () => set({ error: null }),
+
+  initKanbanOrder: () => {
+    const { tickets, kanbanOrder } = get();
+    const nextOrder = { ...kanbanOrder };
+    const statuses = Object.values(TICKET_STATUS);
+    statuses.forEach((status) => {
+      if (!nextOrder[status]) {
+        nextOrder[status] = [];
+      }
+    });
+    tickets.forEach((ticket) => {
+      if (!nextOrder[ticket.status].includes(ticket.id)) {
+        nextOrder[ticket.status].push(ticket.id);
+      }
+    });
+    storage.set("kanban-state", { kanbanOrder: nextOrder, wipLimits: get().wipLimits });
+    set({ kanbanOrder: nextOrder });
+  },
+
+  moveTicketInKanban: (ticketId, fromStatus, toStatus, toIndex = null) => {
+    set((state) => {
+      const nextOrder = { ...state.kanbanOrder };
+      if (!nextOrder[fromStatus] || !nextOrder[toStatus]) return { kanbanOrder: nextOrder };
+      nextOrder[fromStatus] = nextOrder[fromStatus].filter((id) => id !== ticketId);
+      const target = nextOrder[toStatus].filter((id) => id !== ticketId);
+      if (toIndex === null || toIndex >= target.length) {
+        target.push(ticketId);
+      } else {
+        target.splice(toIndex, 0, ticketId);
+      }
+      nextOrder[toStatus] = target;
+      storage.set("kanban-state", { kanbanOrder: nextOrder, wipLimits: state.wipLimits });
+      return { kanbanOrder: nextOrder };
+    });
+  },
+
+  setWipLimit: (status, limit) => {
+    set((state) => {
+      const nextLimits = { ...state.wipLimits, [status]: limit };
+      storage.set("kanban-state", { kanbanOrder: state.kanbanOrder, wipLimits: nextLimits });
+      return { wipLimits: nextLimits };
+    });
+  },
 }));
 
 export default useTicketStore;

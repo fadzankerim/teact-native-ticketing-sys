@@ -8,6 +8,7 @@ import Button from '../../components/common/Button';
 import Badge from '../../components/common/Badge';
 import Avatar from '../../components/common/Avatar';
 import Input from '../../components/common/Input';
+import Skeleton from '../../components/common/Skeleton';
 import { formatRelativeTime } from '../../utils/helpers';
 import { 
   TICKET_STATUS, 
@@ -36,8 +37,14 @@ const TicketListPage = () => {
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    setFilters({ searchQuery: e.target.value });
   };
+
+  useEffect(() => {
+    const debounceId = setTimeout(() => {
+      setFilters({ searchQuery });
+    }, 250);
+    return () => clearTimeout(debounceId);
+  }, [searchQuery, setFilters]);
 
   const handleStatusFilter = (status) => {
     const newStatuses = filters.status.includes(status)
@@ -89,7 +96,7 @@ const TicketListPage = () => {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-textPrimary mb-2">Tickets</h1>
+          <h1 className="text-3xl font-bold text-textPrimary mb-2 tracking-tight">Tickets</h1>
           <p className="text-textSecondary">Manage and track all support tickets</p>
         </div>
         <Link to="/tickets/new">
@@ -133,8 +140,8 @@ const TicketListPage = () => {
               onClick={() => setViewMode('table')}
               className={`p-2 rounded-lg transition-colors ${
                 viewMode === 'table' 
-                  ? 'bg-primary text-white' 
-                  : 'text-textSecondary hover:bg-gray-100'
+                  ? 'bg-primary text-white shadow-sm' 
+                  : 'text-textSecondary hover:bg-slate-100'
               }`}
             >
               <List className="w-5 h-5" />
@@ -143,8 +150,8 @@ const TicketListPage = () => {
               onClick={() => setViewMode('grid')}
               className={`p-2 rounded-lg transition-colors ${
                 viewMode === 'grid' 
-                  ? 'bg-primary text-white' 
-                  : 'text-textSecondary hover:bg-gray-100'
+                  ? 'bg-primary text-white shadow-sm' 
+                  : 'text-textSecondary hover:bg-slate-100'
               }`}
             >
               <Grid className="w-5 h-5" />
@@ -173,7 +180,7 @@ const TicketListPage = () => {
                       className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                         filters.status.includes(status)
                           ? 'bg-primary text-white'
-                          : 'bg-gray-100 text-textPrimary hover:bg-gray-200'
+                          : 'bg-slate-100 text-textPrimary hover:bg-slate-200'
                       }`}
                     >
                       {TICKET_STATUS_LABELS[status]}
@@ -193,7 +200,7 @@ const TicketListPage = () => {
                       className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                         filters.priority.includes(priority)
                           ? 'bg-primary text-white'
-                          : 'bg-gray-100 text-textPrimary hover:bg-gray-200'
+                          : 'bg-slate-100 text-textPrimary hover:bg-slate-200'
                       }`}
                     >
                       {TICKET_PRIORITY_LABELS[priority]}
@@ -217,15 +224,28 @@ const TicketListPage = () => {
       {/* Tickets Display */}
       {isLoading ? (
         <Card>
-          <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-textSecondary">Loading tickets...</p>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <Skeleton className="h-5 w-40" />
+              <Skeleton className="h-5 w-24" />
+            </div>
+            <div className="space-y-3">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="grid grid-cols-12 gap-4 items-center">
+                  <Skeleton className="h-4 col-span-3" />
+                  <Skeleton className="h-4 col-span-3" />
+                  <Skeleton className="h-4 col-span-2" />
+                  <Skeleton className="h-4 col-span-2" />
+                  <Skeleton className="h-4 col-span-2" />
+                </div>
+              ))}
+            </div>
           </div>
         </Card>
       ) : tickets.length === 0 ? (
         <Card>
           <div className="text-center py-12">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-8 h-8 text-textSecondary" />
             </div>
             <h3 className="text-lg font-semibold text-textPrimary mb-2">No tickets found</h3>
@@ -239,7 +259,7 @@ const TicketListPage = () => {
         <Card padding={false}>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 border-b border-border">
+              <thead className="bg-slate-50 border-b border-border">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-textSecondary uppercase tracking-wider">
                     Ticket
@@ -265,14 +285,14 @@ const TicketListPage = () => {
                 {tickets.map(ticket => (
                   <tr 
                     key={ticket.id}
-                    className="hover:bg-gray-50 transition-colors cursor-pointer"
+                    className="hover:bg-slate-50 transition-colors cursor-pointer"
                   >
                     <td className="px-6 py-4">
-                      <Link to={`/tickets/${ticket.id}`} className="block">
+                      <Link to={`/tickets/${ticket.id}`} className="block group">
                         <div className="text-sm font-medium text-primary hover:text-primary-600">
                           #{ticket.id}
                         </div>
-                        <div className="text-sm text-textPrimary max-w-xs truncate">
+                        <div className="text-sm text-textPrimary max-w-xs truncate group-hover:text-slate-900">
                           {ticket.subject}
                         </div>
                       </Link>

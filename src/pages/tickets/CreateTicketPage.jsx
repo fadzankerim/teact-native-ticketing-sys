@@ -107,12 +107,12 @@ const CreateTicketPage = () => {
       <div className="flex items-center space-x-4">
         <button
           onClick={() => navigate('/tickets')}
-          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
         >
           <ArrowLeft className="w-5 h-5 text-textSecondary" />
         </button>
         <div>
-          <h1 className="text-3xl font-bold text-textPrimary">Create New Ticket</h1>
+          <h1 className="text-3xl font-bold text-textPrimary tracking-tight">Create New Ticket</h1>
           <p className="text-textSecondary">Submit a support request</p>
         </div>
       </div>
@@ -168,7 +168,7 @@ const CreateTicketPage = () => {
                     onChange={handleChange}
                     className={`
                       w-full px-4 py-2 border rounded-lg 
-                      focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent 
+                      focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary/60 
                       transition-all duration-200 resize-none
                       ${errors.description ? 'border-error' : 'border-border'}
                     `}
@@ -185,7 +185,7 @@ const CreateTicketPage = () => {
                   <label className="block text-sm font-medium text-textPrimary mb-2">
                     Attachments (Optional)
                   </label>
-                  <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary transition-colors cursor-pointer">
+                  <div className="border-2 border-dashed border-border/70 rounded-xl p-8 text-center hover:border-primary/60 transition-colors cursor-pointer">
                     <Paperclip className="w-8 h-8 text-textSecondary mx-auto mb-2" />
                     <p className="text-sm text-textPrimary mb-1">
                       Click to upload or drag and drop
@@ -221,7 +221,7 @@ const CreateTicketPage = () => {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Tips Card */}
-          <Card title="Tips for faster resolution" className="bg-blue-50 border-blue-200">
+          <Card title="Tips for faster resolution" className="bg-primary-50/60 border-primary-100">
             <ul className="space-y-3 text-sm text-textPrimary">
               <li className="flex items-start">
                 <span className="w-5 h-5 bg-primary rounded-full flex items-center justify-center text-white text-xs mr-3 mt-0.5 shrink-0">
@@ -251,7 +251,7 @@ const CreateTicketPage = () => {
           </Card>
 
           {/* AI Assistance */}
-          <Card title="AI Assistance" className="bg-linear-to-br from-secondary-50 to-primary-50 border-primary-200">
+          <Card title="AI Assistance" className="bg-linear-to-br from-secondary-50 to-primary-50 border-primary-100">
             <div className="space-y-3">
               <p className="text-sm text-textPrimary">
                 Our AI will automatically:

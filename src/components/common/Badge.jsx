@@ -7,7 +7,7 @@ const Badge = ({
   className = '' 
 }) => {
   const variants = {
-    default: 'bg-gray-100 text-gray-800',
+    default: 'bg-slate-100 text-slate-800',
     primary: 'bg-primary-100 text-primary-800',
     secondary: 'bg-secondary-100 text-secondary-800',
     success: 'bg-green-100 text-green-800',

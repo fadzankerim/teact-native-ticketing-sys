@@ -16,13 +16,13 @@ const Button = ({
   type = 'button',
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed';
   
   const variants = {
-    primary: 'bg-primary text-white hover:bg-primary-600 focus:ring-primary-500',
-    secondary: 'bg-secondary text-white hover:bg-secondary-600 focus:ring-secondary-500',
-    outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary-500',
-    ghost: 'text-textSecondary hover:bg-gray-100 focus:ring-gray-500',
+    primary: 'bg-primary text-white hover:bg-primary-600 focus:ring-primary-500 shadow-sm',
+    secondary: 'bg-secondary text-white hover:bg-secondary-600 focus:ring-secondary-500 shadow-sm',
+    outline: 'border border-primary/60 text-primary hover:bg-primary hover:text-white focus:ring-primary-500',
+    ghost: 'text-textSecondary hover:bg-slate-100 focus:ring-slate-200',
     danger: 'bg-error text-white hover:bg-red-600 focus:ring-error',
     success: 'bg-success text-white hover:bg-green-600 focus:ring-success',
   };

@@ -87,30 +87,30 @@ const Sidebar = () => {
       />
 
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 bg-gray-800 text-white z-30 flex flex-col">
+      <aside className="fixed left-0 top-0 h-full w-64 bg-slate-950 text-slate-100 z-30 flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-primary-800">
+        <div className="flex items-center justify-between p-6 border-b border-slate-800">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-              <Ticket className="w-5 h-5 text-primary" />
+            <div className="w-8 h-8 bg-white/10 rounded-xl flex items-center justify-center">
+              <Ticket className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold">TicketHub</span>
           </div>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden text-white hover:text-gray-300"
+            className="lg:hidden text-white hover:text-slate-300"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* User info */}
-        <div className="p-4 border-b border-primary-800">
+        <div className="p-4 border-b border-slate-800">
           <div className="flex items-center space-x-3">
             <Avatar src={user?.avatar} name={user?.name} size="md" />
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium truncate">{user?.name}</p>
-              <p className="text-xs text-primary-300 truncate">{user?.email}</p>
+              <p className="text-xs text-slate-400 truncate">{user?.email}</p>
             </div>
           </div>
         </div>
@@ -130,8 +130,8 @@ const Sidebar = () => {
                   flex items-center space-x-3 px-4 py-3 rounded-lg
                   transition-colors duration-200
                   ${isActive 
-                    ? 'bg-primary-800 text-white' 
-                    : 'text-primary-200 hover:bg-primary-800 hover:text-white'
+                    ? 'bg-white/10 text-white' 
+                    : 'text-slate-300 hover:bg-white/10 hover:text-white'
                   }
                 `}
               >
@@ -143,10 +143,10 @@ const Sidebar = () => {
         </nav>
 
         {/* Logout */}
-        <div className="p-4 border-t border-primary-800">
+        <div className="p-4 border-t border-slate-800">
           <button
             onClick={handleLogout}
-            className="flex items-center space-x-3 px-4 py-3 w-full rounded-lg text-primary-200 hover:bg-primary-800 hover:text-white transition-colors duration-200"
+            className="flex items-center space-x-3 px-4 py-3 w-full rounded-lg text-slate-300 hover:bg-white/10 hover:text-white transition-colors duration-200"
           >
             <LogOut className="w-5 h-5" />
             <span className="font-medium">Logout</span>

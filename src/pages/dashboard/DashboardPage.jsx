@@ -47,7 +47,7 @@ const DashboardPage = () => {
     <div className="space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-3xl font-bold text-textPrimary mb-2">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-textPrimary mb-2 tracking-tight">Dashboard</h1>
         <p className="text-textSecondary">Welcome back! Here's what's happening today.</p>
       </div>
 
@@ -109,7 +109,7 @@ const DashboardPage = () => {
                 <Link
                   key={ticket.id}
                   to={`/tickets/${ticket.id}`}
-                  className="block p-4 border border-border rounded-lg hover:border-primary hover:bg-primary-50 transition-all duration-200"
+                  className="block p-4 border border-border/60 rounded-xl hover:border-primary/60 hover:bg-primary-50/50 transition-all duration-200"
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1 min-w-0">
@@ -155,9 +155,9 @@ const DashboardPage = () => {
         {/* Quick Stats */}
         <Card title="Quick Stats">
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-primary-50/60 rounded-xl">
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center mr-3">
                   <Ticket className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -167,9 +167,9 @@ const DashboardPage = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-xl">
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-success rounded-lg flex items-center justify-center mr-3">
+                <div className="w-10 h-10 bg-success rounded-xl flex items-center justify-center mr-3">
                   <CheckCircle className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -181,9 +181,9 @@ const DashboardPage = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-amber-50 rounded-xl">
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-warning rounded-lg flex items-center justify-center mr-3">
+                <div className="w-10 h-10 bg-warning rounded-xl flex items-center justify-center mr-3">
                   <Clock className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -195,9 +195,9 @@ const DashboardPage = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-teal-50 rounded-xl">
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center mr-3">
+                <div className="w-10 h-10 bg-secondary rounded-xl flex items-center justify-center mr-3">
                   <Users className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -215,7 +215,7 @@ const DashboardPage = () => {
         <Card title="Tickets by Status">
           <div className="space-y-3">
             {[
-              { status: 'NEW', count: tickets.filter(t => t.status === 'NEW').length, color: 'bg-gray-500' },
+              { status: 'NEW', count: tickets.filter(t => t.status === 'NEW').length, color: 'bg-slate-500' },
               { status: 'OPEN', count: tickets.filter(t => t.status === 'OPEN').length, color: 'bg-blue-500' },
               { status: 'IN_PROGRESS', count: tickets.filter(t => t.status === 'IN_PROGRESS').length, color: 'bg-yellow-500' },
               { status: 'RESOLVED', count: tickets.filter(t => t.status === 'RESOLVED').length, color: 'bg-green-500' },
@@ -227,7 +227,7 @@ const DashboardPage = () => {
                     <span className="text-sm font-medium text-textPrimary">{item.status.replace('_', ' ')}</span>
                     <span className="text-sm text-textSecondary">{item.count} ({percentage}%)</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-slate-200 rounded-full h-2">
                     <div 
                       className={`${item.color} h-2 rounded-full transition-all duration-300`}
                       style={{ width: `${percentage}%` }}
@@ -245,7 +245,7 @@ const DashboardPage = () => {
               { priority: 'URGENT', count: tickets.filter(t => t.priority === 'URGENT').length, color: 'bg-red-500' },
               { priority: 'HIGH', count: tickets.filter(t => t.priority === 'HIGH').length, color: 'bg-orange-500' },
               { priority: 'MEDIUM', count: tickets.filter(t => t.priority === 'MEDIUM').length, color: 'bg-blue-500' },
-              { priority: 'LOW', count: tickets.filter(t => t.priority === 'LOW').length, color: 'bg-gray-500' },
+              { priority: 'LOW', count: tickets.filter(t => t.priority === 'LOW').length, color: 'bg-slate-500' },
             ].map(item => {
               const percentage = tickets.length > 0 ? (item.count / tickets.length * 100).toFixed(1) : 0;
               return (
@@ -254,7 +254,7 @@ const DashboardPage = () => {
                     <span className="text-sm font-medium text-textPrimary">{item.priority}</span>
                     <span className="text-sm text-textSecondary">{item.count} ({percentage}%)</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-slate-200 rounded-full h-2">
                     <div 
                       className={`${item.color} h-2 rounded-full transition-all duration-300`}
                       style={{ width: `${percentage}%` }}

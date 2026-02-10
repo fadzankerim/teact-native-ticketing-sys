@@ -21,7 +21,7 @@ const Header = () => {
   const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <header className="bg-white border-b border-border sticky top-0 z-10">
+    <header className="bg-surface/90 border-b border-border sticky top-0 z-10 backdrop-blur">
       <div className="flex items-center justify-between px-6 py-5">
         {/* Left side */}
         <div className="flex items-center space-x-4 flex-1">
@@ -49,7 +49,7 @@ const Header = () => {
           <div className="relative">
             <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-2 text-textSecondary hover:text-textPrimary hover:bg-gray-100 rounded-lg transition-colors"
+              className="relative p-2 text-textSecondary hover:text-textPrimary hover:bg-slate-100 rounded-lg transition-colors"
             >
               <Bell className="w-5 h-5" />
               {unreadCount > 0 && (
@@ -81,7 +81,7 @@ const Header = () => {
                     notifications.slice(0, 5).map((notification) => (
                       <div
                         key={notification.id}
-                        className={`p-4 border-b border-border hover:bg-gray-50 cursor-pointer ${
+                        className={`p-4 border-b border-border hover:bg-slate-50 cursor-pointer ${
                           !notification.read ? 'bg-primary-50' : ''
                         }`}
                       >
