@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Ticket, 
@@ -13,19 +13,24 @@ import Card from '../../components/common/Card';
 import Badge from '../../components/common/Badge';
 import Avatar from '../../components/common/Avatar';
 import { formatRelativeTime } from '../../utils/helpers';
-import { TICKET_STATUS_COLORS, TICKET_PRIORITY_COLORS } from '../../utils/constants';
-import useTicketStore from '../../store/ticketStore';
+import useTicketStore from '../../Stores/ticketStore';
 import KPICard from '../../components/common/KPICard';
+import { useShallow } from 'zustand/react/shallow';
 
 const DashboardPage = () => {
-  const { tickets, fetchTickets } = useTicketStore();
+  const { tickets, fetchTickets } = useTicketStore(
+    useShallow((state) => ({
+      tickets: state.tickets,
+      fetchTickets: state.fetchTickets,
+    })),
+  );
 
   useEffect(() => {
     fetchTickets();
-  }, []);
+  }, [fetchTickets]);
 
   // Calculate KPIs
-  const kpis = {
+  const kpis = useMemo(() => ({
     openTickets: tickets.filter(t => ['NEW', 'OPEN', 'IN_PROGRESS'].includes(t.status)).length,
     resolvedToday: tickets.filter(t => {
       const today = new Date().toDateString();
@@ -34,9 +39,9 @@ const DashboardPage = () => {
     }).length,
     avgResponseTime: '2.5h',
     satisfaction: 94.5,
-  };
+  }), [tickets]);
 
-  const recentTickets = tickets.slice(0, 5);
+  const recentTickets = useMemo(() => tickets.slice(0, 5), [tickets]);
 
   return (
     <div className="space-y-6">

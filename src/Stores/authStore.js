@@ -9,13 +9,13 @@ const useAuthStore = create(
       //State
       user: null,
       token: null,
-      isAuthenticated: null,
-      isLoading: null,
+      isAuthenticated: false,
+      isLoading: false,
       error: null,
 
       // Actions
 
-      setUser: (user) => ({ user, isAuthenticated: true }),
+      setUser: (user) => set({ user, isAuthenticated: true }),
       setToken: (token) => set({ token }),
 
       login: async (credentials) => {

@@ -10,14 +10,22 @@ import {
   X,
   Kanban
 } from 'lucide-react';
-import useAuthStore from '../../store/authStore';
-import useUIStore from '../../store/uiStore';
+import useAuthStore from '../../Stores/authStore';
+import useUIStore from '../../Stores/uiStore';
 import Avatar from '../common/Avatar';
+import { useShallow } from 'zustand/react/shallow';
 
 const Sidebar = () => {
   const location = useLocation();
-  const { user, logout } = useAuthStore();
-  const { sidebarOpen, setSidebarOpen } = useUIStore();
+  const { user, logout } = useAuthStore(
+    useShallow((state) => ({ user: state.user, logout: state.logout })),
+  );
+  const { sidebarOpen, setSidebarOpen } = useUIStore(
+    useShallow((state) => ({
+      sidebarOpen: state.sidebarOpen,
+      setSidebarOpen: state.setSidebarOpen,
+    })),
+  );
 
   const menuItems = [
     { 
@@ -79,7 +87,7 @@ const Sidebar = () => {
       />
 
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 bg-primary-900 text-white z-30 flex flex-col">
+      <aside className="fixed left-0 top-0 h-full w-64 bg-gray-800 text-white z-30 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-primary-800">
           <div className="flex items-center space-x-2">

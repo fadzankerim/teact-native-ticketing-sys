@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { Search, Bell, Menu } from 'lucide-react';
-import useUIStore from '../../store/uiStore';
-import useAuthStore from '../../store/authStore';
+import useUIStore from '../../Stores/uiStore';
+import useAuthStore from '../../Stores/authStore';
 import Avatar from '../common/Avatar';
 import Badge from '../common/Badge';
+import { useShallow } from 'zustand/react/shallow';
 
 const Header = () => {
-  const {  toggleSidebar, notifications } = useUIStore();
-  const { user } = useAuthStore();
+  const { toggleSidebar, notifications } = useUIStore(
+    useShallow((state) => ({
+      toggleSidebar: state.toggleSidebar,
+      notifications: state.notifications,
+    })),
+  );
+  const { user } = useAuthStore(
+    useShallow((state) => ({ user: state.user })),
+  );
   const [showNotifications, setShowNotifications] = useState(false);
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
     <header className="bg-white border-b border-border sticky top-0 z-10">
-      <div className="flex items-center justify-between px-6 py-4">
+      <div className="flex items-center justify-between px-6 py-5">
         {/* Left side */}
         <div className="flex items-center space-x-4 flex-1">
           <button

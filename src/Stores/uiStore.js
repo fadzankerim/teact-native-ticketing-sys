@@ -1,10 +1,8 @@
-import { create } from "zustand";
+import  {create}  from "zustand";
 
 const useUIStore = create((set) => ({
-
-
     // state
-    sidebatOpen: true,
+    sidebarOpen: true,
     theme: "light",
     notifications: [],
     modal: {
@@ -15,9 +13,9 @@ const useUIStore = create((set) => ({
         onCancel: null
     },
 
-    toggleSidebar: () => set((state) => ({ sidebatOpen : !state.sidebatOpen })),
+    toggleSidebar: () => set((state) => ({ sidebarOpen : !state.sidebarOpen })),
 
-    setSidebarOpen: (isOpen) => set({ sidebatOpen: isOpen }),
+    setSidebarOpen: (isOpen) => set({ sidebarOpen: isOpen }),
 
     setTheme: (theme) => set({ theme }),
 
@@ -27,7 +25,7 @@ const useUIStore = create((set) => ({
 
     //Notifications
 
-    addNotofications: (notification) => {
+    addNotifications: (notification) => {
         const id = Date.now();
 
         set((state) => ({

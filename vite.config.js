@@ -7,6 +7,14 @@ export default defineConfig({
   plugins: [react(),
   tailwindcss()
   ],
+  esbuild: {
+    loader: 'jsx', // Ensure JSX loader is set
+    include: [
+      // Ensure .js files are treated as JSX
+      'src/**/*.js',
+      'src/**/*.jsx',
+    ],
+  },
   server: {
     port: 3000,
     proxy: {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail, Lock, ArrowRight, Building } from 'lucide-react';
 import { toast } from 'react-hot-toast';
-import useAuthStore from '../../store/authStore';
+import useAuthStore from '../../Stores/authStore';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import Dropdown from '../../components/common/Dropdown';
@@ -241,7 +241,7 @@ const RegisterPage = () => {
       </div>
 
       {/* Right side - Decorative */}
-      <div className="hidden lg:flex lg:w-2/5 bg-gradient-to-br from-secondary to-primary relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-2/5 bg-linear-to-br from-secondary to-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 right-20 w-72 h-72 bg-white rounded-full blur-3xl" />
           <div className="absolute bottom-20 left-20 w-96 h-96 bg-white rounded-full blur-3xl" />
@@ -251,7 +251,7 @@ const RegisterPage = () => {
           <h2 className="text-4xl font-bold mb-6">Join TicketHub Today</h2>
           <ul className="space-y-4">
             <li className="flex items-start space-x-3">
-              <svg className="w-6 h-6 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-6 h-6 shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
               <div>
@@ -260,7 +260,7 @@ const RegisterPage = () => {
               </div>
             </li>
             <li className="flex items-start space-x-3">
-              <svg className="w-6 h-6 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-6 h-6 shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
               <div>
@@ -269,7 +269,7 @@ const RegisterPage = () => {
               </div>
             </li>
             <li className="flex items-start space-x-3">
-              <svg className="w-6 h-6 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-6 h-6 shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
               <div>

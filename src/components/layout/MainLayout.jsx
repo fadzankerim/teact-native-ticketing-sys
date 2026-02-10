@@ -2,10 +2,13 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
-import useUIStore from '../../store/uiStore';
+import useUIStore from '../../Stores/uiStore';
+import { useShallow } from 'zustand/react/shallow';
 
 const MainLayout = () => {
-  const { sidebarOpen } = useUIStore();
+  const { sidebarOpen } = useUIStore(
+    useShallow((state) => ({ sidebarOpen: state.sidebarOpen })),
+  );
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">

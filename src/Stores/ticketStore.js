@@ -62,7 +62,7 @@ const useTicketStore = create((set, get) => ({
     priority: [],
     category: [],
     assignedTo: null,
-    serchQuery: "",
+    searchQuery: "",
   },
   pagination: {
     currentPage: 1,
@@ -170,7 +170,7 @@ const useTicketStore = create((set, get) => ({
     }
   },
 
-  createTicket: async (tikcetData) => {
+  createTicket: async (ticketData) => {
     set({ isLoading: true, error: null });
 
     try {
@@ -179,7 +179,7 @@ const useTicketStore = create((set, get) => ({
 
       const newTicket = {
         id: String(Date.now()),
-        ...tikcetData,
+        ...ticketData,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         assignedTo: null,
@@ -190,7 +190,7 @@ const useTicketStore = create((set, get) => ({
       mockTickets.unshift(newTicket);
 
       set((state) => ({
-        tickets: [state.newTicket, ...mockTickets],
+        tickets: [newTicket, ...state.tickets],
         isLoading: false,
       }));
 
@@ -227,7 +227,7 @@ const useTicketStore = create((set, get) => ({
           t.id === id ? mockTickets[ticketIndex] : t,
         ),
         currentTicket:
-          state.currentTicket.id === id
+          state.currentTicket?.id === id
             ? { ...state.currentTicket, ...mockTickets[ticketIndex] }
             : state.currentTicket,
         isLoading: false,
@@ -303,7 +303,6 @@ const useTicketStore = create((set, get) => ({
       filters: { ...state.filters, ...newFilters },
       pagination: { ...state.pagination, currentPage: 1 },
     }));
-    get().fetchTickets();
   },
 
   setPage: (page) => {
