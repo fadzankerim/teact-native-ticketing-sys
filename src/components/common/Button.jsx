@@ -22,7 +22,7 @@ const Button = ({
     primary: 'bg-primary text-white hover:bg-primary-600 focus:ring-primary-500 shadow-sm',
     secondary: 'bg-secondary text-white hover:bg-secondary-600 focus:ring-secondary-500 shadow-sm',
     outline: 'border border-primary/60 text-primary hover:bg-primary hover:text-white focus:ring-primary-500',
-    ghost: 'text-textSecondary hover:bg-slate-100 focus:ring-slate-200',
+    ghost: 'text-textSecondary hover:bg-primary/10 focus:ring-slate-200',
     danger: 'bg-error text-white hover:bg-red-600 focus:ring-error',
     success: 'bg-success text-white hover:bg-green-600 focus:ring-success',
   };

@@ -92,6 +92,7 @@ const DashboardPage = () => {
         <Card 
           title="Recent Tickets" 
           className="lg:col-span-2"
+          hover
           headerAction={
             <Link to="/tickets" className="text-sm text-primary hover:text-primary-600 font-medium">
               View all
@@ -153,7 +154,7 @@ const DashboardPage = () => {
         </Card>
 
         {/* Quick Stats */}
-        <Card title="Quick Stats">
+        <Card title="Quick Stats" hover>
           <div className="space-y-4">
             <div className="flex items-center justify-between p-3 bg-primary-50/60 rounded-xl">
               <div className="flex items-center">
@@ -210,9 +211,9 @@ const DashboardPage = () => {
         </Card>
       </div>
 
-      {/* Ticket Distribution */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card title="Tickets by Status">
+      {/* Ticket Distribution + Analytics */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <Card title="Tickets by Status" hover className="lg:col-span-2">
           <div className="space-y-3">
             {[
               { status: 'NEW', count: tickets.filter(t => t.status === 'NEW').length, color: 'bg-slate-500' },
@@ -227,7 +228,7 @@ const DashboardPage = () => {
                     <span className="text-sm font-medium text-textPrimary">{item.status.replace('_', ' ')}</span>
                     <span className="text-sm text-textSecondary">{item.count} ({percentage}%)</span>
                   </div>
-                  <div className="w-full bg-slate-200 rounded-full h-2">
+                  <div className="w-full surface-muted rounded-full h-2">
                     <div 
                       className={`${item.color} h-2 rounded-full transition-all duration-300`}
                       style={{ width: `${percentage}%` }}
@@ -239,7 +240,25 @@ const DashboardPage = () => {
           </div>
         </Card>
 
-        <Card title="Tickets by Priority">
+        <Card title="Weekly Volume" subtitle="New tickets per day" hover>
+          <div className="h-48 flex items-end gap-2">
+            {[22, 30, 18, 36, 28, 42, 33].map((value, index) => (
+              <div key={index} className="flex-1 flex flex-col items-center gap-2">
+                <div
+                  className="w-full rounded-xl bg-linear-to-t from-primary-600/70 to-primary-400/60 shadow-sm"
+                  style={{ height: `${value * 2.2}px` }}
+                />
+                <span className="text-xs text-textSecondary">
+                  {['M','T','W','T','F','S','S'][index]}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card title="Tickets by Priority" hover>
           <div className="space-y-3">
             {[
               { priority: 'URGENT', count: tickets.filter(t => t.priority === 'URGENT').length, color: 'bg-red-500' },
@@ -254,7 +273,7 @@ const DashboardPage = () => {
                     <span className="text-sm font-medium text-textPrimary">{item.priority}</span>
                     <span className="text-sm text-textSecondary">{item.count} ({percentage}%)</span>
                   </div>
-                  <div className="w-full bg-slate-200 rounded-full h-2">
+                  <div className="w-full surface-muted rounded-full h-2">
                     <div 
                       className={`${item.color} h-2 rounded-full transition-all duration-300`}
                       style={{ width: `${percentage}%` }}
@@ -263,6 +282,32 @@ const DashboardPage = () => {
                 </div>
               );
             })}
+          </div>
+        </Card>
+
+        <Card title="SLA Health" subtitle="Resolution within SLA" hover>
+          <div className="flex items-center justify-between gap-6">
+            <div className="flex-1">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm text-textSecondary">On time</span>
+                <span className="text-sm font-medium text-textPrimary">86%</span>
+              </div>
+              <div className="w-full surface-muted rounded-full h-2">
+                <div className="h-2 rounded-full bg-emerald-500" style={{ width: '86%' }} />
+              </div>
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm text-textSecondary">At risk</span>
+                <span className="text-sm font-medium text-textPrimary">9%</span>
+              </div>
+              <div className="w-full surface-muted rounded-full h-2">
+                <div className="h-2 rounded-full bg-amber-500" style={{ width: '9%' }} />
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 text-xs text-textSecondary">
+            Trend is improving week-over-week.
           </div>
         </Card>
       </div>

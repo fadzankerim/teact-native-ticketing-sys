@@ -56,7 +56,7 @@ const LoginPage = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h1 className="text-5xl font-bold mb-4 tracking-tight">Welcome to TicketHub</h1>
+            <h1 className="text-5xl font-bold mb-4 tracking-tight">Welcome to Orion</h1>
             <p className="text-xl text-white/90">
               Manage your support tickets with AI-powered efficiency
             </p>

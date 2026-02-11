@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Search, Bell, Menu } from 'lucide-react';
 import useUIStore from '../../Stores/uiStore';
 import useAuthStore from '../../Stores/authStore';
 import Avatar from '../common/Avatar';
 import Badge from '../common/Badge';
+import useTicketStore from '../../Stores/ticketStore';
 import { useShallow } from 'zustand/react/shallow';
 
 const Header = () => {
@@ -16,13 +17,27 @@ const Header = () => {
   const { user } = useAuthStore(
     useShallow((state) => ({ user: state.user })),
   );
+  const { filters, setFilters } = useTicketStore(
+    useShallow((state) => ({
+      filters: state.filters,
+      setFilters: state.setFilters,
+    })),
+  );
   const [showNotifications, setShowNotifications] = useState(false);
+  const [headerSearch, setHeaderSearch] = useState(filters.searchQuery || '');
+
+  useEffect(() => {
+    const debounceId = setTimeout(() => {
+      setFilters({ searchQuery: headerSearch });
+    }, 250);
+    return () => clearTimeout(debounceId);
+  }, [headerSearch, setFilters]);
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <header className="bg-surface/90 border-b border-border sticky top-0 z-10 backdrop-blur">
-      <div className="flex items-center justify-between px-6 py-5">
+    <header className="bg-surface/75 border-b border-border sticky top-0 z-10 backdrop-blur">
+      <div className="flex items-center justify-between px-6 py-4">
         {/* Left side */}
         <div className="flex items-center space-x-4 flex-1">
           <button
@@ -38,8 +53,18 @@ const Header = () => {
             <input
               type="text"
               placeholder="Search tickets..."
-              className="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              value={headerSearch}
+              onChange={(event) => setHeaderSearch(event.target.value)}
+              className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-surface/70 text-textPrimary border border-border/60 backdrop-blur shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary/60 transition-all duration-200"
             />
+            {headerSearch.length > 0 && (
+              <button
+                onClick={() => setHeaderSearch('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-textSecondary hover:text-textPrimary"
+              >
+                Clear
+              </button>
+            )}
           </div>
         </div>
 
@@ -49,7 +74,7 @@ const Header = () => {
           <div className="relative">
             <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-2 text-textSecondary hover:text-textPrimary hover:bg-slate-100 rounded-lg transition-colors"
+              className="relative p-2 text-textSecondary hover:text-textPrimary hover:bg-primary/10 rounded-lg transition-colors"
             >
               <Bell className="w-5 h-5" />
               {unreadCount > 0 && (
@@ -61,7 +86,7 @@ const Header = () => {
 
             {/* Notifications dropdown */}
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-border overflow-hidden">
+              <div className="absolute right-0 mt-2 w-80 bg-surface rounded-lg shadow-card border border-border/60 overflow-hidden">
                 <div className="p-4 border-b border-border">
                   <div className="flex items-center justify-between">
                     <h3 className="font-semibold text-textPrimary">Notifications</h3>
@@ -81,8 +106,8 @@ const Header = () => {
                     notifications.slice(0, 5).map((notification) => (
                       <div
                         key={notification.id}
-                        className={`p-4 border-b border-border hover:bg-slate-50 cursor-pointer ${
-                          !notification.read ? 'bg-primary-50' : ''
+                        className={`p-4 border-b border-border/60 hover:bg-primary/10 cursor-pointer ${
+                          !notification.read ? 'surface-muted' : ''
                         }`}
                       >
                         <p className="text-sm text-textPrimary">{notification.message}</p>

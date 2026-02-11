@@ -100,7 +100,7 @@ const TicketListPage = () => {
           <p className="text-textSecondary">Manage and track all support tickets</p>
         </div>
         <Link to="/tickets/new">
-          <Button variant="primary" leftIcon={<Plus className="w-5 h-5" />}>
+          <Button variant="primary" leftIcon={<Plus className="w-5 h-5" />} className="glass-hover">
             Create Ticket
           </Button>
         </Link>
@@ -125,6 +125,7 @@ const TicketListPage = () => {
               variant="outline"
               leftIcon={<Filter className="w-5 h-5" />}
               onClick={() => setShowFilters(!showFilters)}
+              className="glass-hover"
             >
               Filters
               {activeFilterCount > 0 && (
@@ -138,20 +139,20 @@ const TicketListPage = () => {
 
             <button
               onClick={() => setViewMode('table')}
-              className={`p-2 rounded-lg transition-colors ${
+              className={`p-2 rounded-lg transition-colors glass-hover ${
                 viewMode === 'table' 
                   ? 'bg-primary text-white shadow-sm' 
-                  : 'text-textSecondary hover:bg-slate-100'
+                  : 'text-textSecondary hover:bg-primary/10'
               }`}
             >
               <List className="w-5 h-5" />
             </button>
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded-lg transition-colors ${
+              className={`p-2 rounded-lg transition-colors glass-hover ${
                 viewMode === 'grid' 
                   ? 'bg-primary text-white shadow-sm' 
-                  : 'text-textSecondary hover:bg-slate-100'
+                  : 'text-textSecondary hover:bg-primary/10'
               }`}
             >
               <Grid className="w-5 h-5" />
@@ -159,7 +160,7 @@ const TicketListPage = () => {
 
             <div className="border-l border-border mx-2" />
 
-            <Button variant="ghost" leftIcon={<Download className="w-5 h-5" />}>
+            <Button variant="ghost" leftIcon={<Download className="w-5 h-5" />} className="glass-hover">
               Export
             </Button>
           </div>
@@ -180,7 +181,7 @@ const TicketListPage = () => {
                       className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                         filters.status.includes(status)
                           ? 'bg-primary text-white'
-                          : 'bg-slate-100 text-textPrimary hover:bg-slate-200'
+                          : 'surface-muted text-textPrimary hover:bg-primary/10'
                       }`}
                     >
                       {TICKET_STATUS_LABELS[status]}
@@ -200,7 +201,7 @@ const TicketListPage = () => {
                       className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                         filters.priority.includes(priority)
                           ? 'bg-primary text-white'
-                          : 'bg-slate-100 text-textPrimary hover:bg-slate-200'
+                          : 'surface-muted text-textPrimary hover:bg-primary/10'
                       }`}
                     >
                       {TICKET_PRIORITY_LABELS[priority]}
@@ -245,7 +246,7 @@ const TicketListPage = () => {
       ) : tickets.length === 0 ? (
         <Card>
           <div className="text-center py-12">
-            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 surface-muted rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-8 h-8 text-textSecondary" />
             </div>
             <h3 className="text-lg font-semibold text-textPrimary mb-2">No tickets found</h3>
@@ -259,7 +260,7 @@ const TicketListPage = () => {
         <Card padding={false}>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-50 border-b border-border">
+              <thead className="table-header border-b border-border">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-textSecondary uppercase tracking-wider">
                     Ticket
@@ -281,11 +282,11 @@ const TicketListPage = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-border">
+              <tbody className="bg-surface divide-y divide-border">
                 {tickets.map(ticket => (
                   <tr 
                     key={ticket.id}
-                    className="hover:bg-slate-50 transition-colors cursor-pointer"
+                    className="table-row transition-colors cursor-pointer glass-hover"
                   >
                     <td className="px-6 py-4">
                       <Link to={`/tickets/${ticket.id}`} className="block group">

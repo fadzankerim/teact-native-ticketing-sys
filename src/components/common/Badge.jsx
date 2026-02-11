@@ -7,13 +7,13 @@ const Badge = ({
   className = '' 
 }) => {
   const variants = {
-    default: 'bg-slate-100 text-slate-800',
-    primary: 'bg-primary-100 text-primary-800',
-    secondary: 'bg-secondary-100 text-secondary-800',
-    success: 'bg-green-100 text-green-800',
-    warning: 'bg-yellow-100 text-yellow-800',
-    error: 'bg-red-100 text-red-800',
-    info: 'bg-cyan-100 text-cyan-800',
+    default: 'badge badge-default',
+    primary: 'badge badge-primary',
+    secondary: 'badge badge-secondary',
+    success: 'badge badge-success',
+    warning: 'badge badge-warning',
+    error: 'badge badge-error',
+    info: 'badge badge-info',
   };
   
   const sizes = {

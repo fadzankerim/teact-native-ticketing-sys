@@ -101,7 +101,7 @@ const RegisterPage = () => {
                 Profile Setup
               </span>
             </div>
-            <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div className="h-2 surface-muted rounded-full overflow-hidden">
               <div 
                 className="h-full bg-primary transition-all duration-300"
                 style={{ width: `${(step / 2) * 100}%` }}
@@ -248,7 +248,7 @@ const RegisterPage = () => {
         </div>
         
         <div className="relative z-10 flex flex-col justify-center px-16 text-white">
-          <h2 className="text-4xl font-bold mb-6 tracking-tight">Join TicketHub Today</h2>
+          <h2 className="text-4xl font-bold mb-6 tracking-tight">Join Orion Today</h2>
           <ul className="space-y-4">
             <li className="flex items-start space-x-3">
               <svg className="w-6 h-6 shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

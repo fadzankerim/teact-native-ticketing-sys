@@ -45,8 +45,19 @@ const SettingsPage = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-textPrimary mb-2 tracking-tight">Settings</h1>
-        <p className="text-textSecondary">Manage your account and preferences</p>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h1 className="text-3xl font-bold text-textPrimary mb-2 tracking-tight">Settings</h1>
+            <p className="text-textSecondary">Manage your account and preferences</p>
+          </div>
+          <button
+            onClick={toggleTheme}
+            className="glass-hover inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-border/60 bg-surface text-sm font-medium text-textPrimary shadow-sm"
+          >
+            <Palette className="w-4 h-4" />
+            Theme: {theme}
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -82,7 +93,7 @@ const SettingsPage = () => {
                 { id: 'inAppNotifications', label: 'In-app notifications' },
                 { id: 'weeklySummary', label: 'Weekly summary report' },
               ].map((item) => (
-                <label key={item.id} className="flex items-center justify-between p-3 rounded-xl border border-border/60 bg-slate-50">
+                <label key={item.id} className="flex items-center justify-between p-3 rounded-xl border border-border/60 surface-muted">
                   <div>
                     <p className="text-sm font-medium text-textPrimary">{item.label}</p>
                     <p className="text-xs text-textSecondary">Recommended for faster response</p>

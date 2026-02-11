@@ -44,7 +44,7 @@ const Dropdown = ({
           focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary/60
           transition-all duration-200 flex items-center justify-between
           ${error ? 'border-error' : 'border-border'}
-          ${disabled ? 'bg-slate-100 cursor-not-allowed' : 'bg-surface hover:border-primary/60'}
+          ${disabled ? 'surface-muted cursor-not-allowed' : 'bg-surface hover:border-primary/60'}
         `}
       >
         <span className={selectedOption ? 'text-textPrimary' : 'text-textSecondary'}>
@@ -54,7 +54,7 @@ const Dropdown = ({
       </button>
 
       {isOpen && !disabled && (
-        <div className="absolute z-10 w-full mt-1 bg-surface border border-border rounded-lg shadow-card max-h-60 overflow-auto">
+        <div className="absolute z-10 w-full mt-1 bg-surface/95 backdrop-blur border border-border rounded-lg shadow-card max-h-60 overflow-auto">
           {options.map((option) => (
             <button
               key={option.value}
@@ -64,7 +64,7 @@ const Dropdown = ({
                 setIsOpen(false);
               }}
               className={`
-                w-full px-4 py-2 text-left hover:bg-slate-50 transition-colors
+                w-full px-4 py-2 text-left hover:bg-primary/10 transition-colors
                 ${value === option.value ? 'bg-primary-50 text-primary' : 'text-textPrimary'}
               `}
             >

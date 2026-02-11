@@ -28,6 +28,44 @@
   /* Shadows */
   --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.06), 0 8px 24px -16px rgb(15 23 42 / 0.35);
   --shadow-card-hover: 0 12px 32px -20px rgb(15 23 42 / 0.45);
+
+  /* Glass hover */
+  --glass-start: rgba(255, 255, 255, 0.65);
+  --glass-end: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(148, 163, 184, 0.4);
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+html[data-theme='dark'] {
+  --color-background: #111827;
+  --color-surface: #1f2937;
+  --color-textPrimary: #e5e7eb;
+  --color-textSecondary: #cbd5e1;
+  --color-border: #334155;
+  --color-primary: #93a4ff;
+  --color-primary-50: #1e1b4b;
+  --color-primary-100: #2b2a66;
+  --color-primary-500: #93a4ff;
+  --color-primary-600: #7f92ff;
+  --color-primary-800: #4338ca;
+  --color-secondary: #7edacb;
+  --color-secondary-600: #5fcdb9;
+  --color-success: #22c55e;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-info: #38bdf8;
+  --color-ring-primary: #818cf8;
+  --color-ring-secondary: #2dd4bf;
+  --color-ring-error: #f87171;
+  --color-ring-success: #22c55e;
+  --shadow-card: 0 1px 2px 0 rgb(2 6 23 / 0.5), 0 14px 30px -18px rgb(2 6 23 / 0.7);
+  --shadow-card-hover: 0 24px 44px -24px rgb(2 6 23 / 0.75);
+  --glass-start: rgba(30, 41, 59, 0.7);
+  --glass-end: rgba(15, 23, 42, 0.4);
+  --glass-border: rgba(148, 163, 184, 0.15);
 }
 
 /* Custom scrollbar */
@@ -145,6 +183,44 @@
     box-shadow: var(--shadow-card-hover);
   }
 
+  .glass-hover {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-hover::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, var(--glass-start), var(--glass-end));
+    opacity: 0;
+    transition: opacity 180ms ease;
+  }
+
+  .glass-hover:hover::before {
+    opacity: 1;
+  }
+
+  .glass-hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--glass-border);
+    opacity: 0;
+    transition: opacity 180ms ease;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .glass-hover:hover::after {
+    opacity: 1;
+  }
+
+  .glass-hover > * {
+    position: relative;
+    z-index: 1;
+  }
+
   .btn {
     @apply px-4 py-2 rounded-lg font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98];
   }
@@ -193,23 +269,51 @@
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
   }
 
-  .badge-success {
-    @apply bg-green-100 text-green-800;
-  }
-
-  .badge-warning {
-    @apply bg-yellow-100 text-yellow-800;
-  }
-
-  .badge-error {
-    @apply bg-red-100 text-red-800;
-  }
-
-  .badge-info {
-    @apply bg-blue-100 text-blue-800;
+  .badge-default {
+    background-color: color-mix(in oklab, var(--color-textSecondary) 12%, transparent);
+    color: var(--color-textPrimary);
   }
 
   .badge-primary {
-    @apply bg-primary-100 text-primary-800;
+    background-color: color-mix(in oklab, var(--color-primary) 16%, transparent);
+    color: var(--color-primary);
   }
+
+  .badge-secondary {
+    background-color: color-mix(in oklab, var(--color-secondary) 18%, transparent);
+    color: var(--color-secondary);
+  }
+
+  .badge-success {
+    background-color: color-mix(in oklab, var(--color-success) 18%, transparent);
+    color: var(--color-success);
+  }
+
+  .badge-warning {
+    background-color: color-mix(in oklab, var(--color-warning) 20%, transparent);
+    color: var(--color-warning);
+  }
+
+  .badge-error {
+    background-color: color-mix(in oklab, var(--color-error) 18%, transparent);
+    color: var(--color-error);
+  }
+
+  .badge-info {
+    background-color: color-mix(in oklab, var(--color-info) 18%, transparent);
+    color: var(--color-info);
+  }
+
+  .table-header {
+    background-color: color-mix(in oklab, var(--color-surface) 70%, var(--color-background));
+  }
+
+  .table-row:hover {
+    background-color: color-mix(in oklab, var(--color-primary) 6%, transparent);
+  }
+
+}
+
+.surface-muted {
+  background-color: color-mix(in oklab, var(--color-surface) 85%, var(--color-background));
 }

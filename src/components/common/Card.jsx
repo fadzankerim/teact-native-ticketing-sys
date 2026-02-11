@@ -12,7 +12,7 @@ const Card = ({
   return (
     <div className={`
       bg-surface rounded-xl shadow-card border border-border/60
-      ${hover ? 'transition-all duration-200 hover:shadow-card-hover hover:-translate-y-0.5' : ''}
+      ${hover ? 'transition-all duration-200 hover:shadow-card-hover hover:-translate-y-0.5 glass-hover' : ''}
       ${className}
     `}>
       {(title || subtitle || headerAction) && (

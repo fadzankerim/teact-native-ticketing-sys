@@ -143,7 +143,7 @@ const KanbanBoardPage = () => {
               onDragOver={(event) => event.preventDefault()}
               onDrop={(event) => handleDrop(status, event)}
             >
-              <div className="flex items-center justify-between px-4 py-3 border-b border-border/60 bg-slate-50">
+              <div className="flex items-center justify-between px-4 py-3 border-b border-border/60 surface-muted">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-semibold text-textPrimary">
                     {TICKET_STATUS_LABELS[status]}
@@ -178,7 +178,7 @@ const KanbanBoardPage = () => {
                     onClick={() => {
                       if (!draggingId) setSelectedTicketId(ticket.id);
                     }}
-                    className={`rounded-xl border border-border/60 bg-surface p-3 shadow-sm transition-all ${
+                    className={`rounded-xl border border-border/60 bg-surface p-3 shadow-sm transition-all glass-hover ${
                       draggingId === ticket.id ? 'opacity-60 scale-[0.98]' : 'hover:-translate-y-0.5 hover:shadow-card-hover'
                     }`}
                   >
@@ -199,7 +199,7 @@ const KanbanBoardPage = () => {
                   </div>
                 ))}
                 {(ticketsByStatus[status] || []).length === 0 && (
-                  <div className="text-xs text-textSecondary border border-dashed border-border/70 rounded-lg p-4 text-center">
+                  <div className="text-xs text-textSecondary border border-dashed border-border/70 rounded-lg p-4 text-center surface-muted">
                     Drop tickets here
                   </div>
                 )}
@@ -225,7 +225,7 @@ const KanbanBoardPage = () => {
               </div>
               <button
                 onClick={() => setSelectedTicketId(null)}
-                className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+                className="p-2 rounded-lg hover:bg-primary/10 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -245,7 +245,7 @@ const KanbanBoardPage = () => {
                 Created {formatRelativeTime(selectedTicket.createdAt)}
               </p>
 
-              <div className="bg-slate-50 rounded-xl p-4 text-sm text-textPrimary whitespace-pre-wrap">
+              <div className="surface-muted rounded-xl p-4 text-sm text-textPrimary whitespace-pre-wrap">
                 {selectedTicket.description}
               </div>
 
@@ -267,9 +267,9 @@ const KanbanBoardPage = () => {
 
               <div className="flex items-center gap-3">
                 <Link to={`/tickets/${selectedTicket.id}`} className="flex-1">
-                  <Button variant="primary" fullWidth>Open ticket</Button>
+                  <Button variant="primary" fullWidth className="glass-hover">Open ticket</Button>
                 </Link>
-                <Button variant="outline" onClick={() => setSelectedTicketId(null)}>
+                <Button variant="outline" onClick={() => setSelectedTicketId(null)} className="glass-hover">
                   Close
                 </Button>
               </div>

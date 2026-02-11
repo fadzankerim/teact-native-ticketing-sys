@@ -50,7 +50,7 @@ const Input = ({
             ${leftIcon ? 'pl-10' : ''}
             ${rightIcon ? 'pr-10' : ''}
             ${error ? 'border-error focus:ring-error' : 'border-border'}
-            ${disabled ? 'bg-slate-100 cursor-not-allowed' : 'bg-surface'}
+            ${disabled ? 'surface-muted cursor-not-allowed' : 'bg-surface'}
           `}
           {...props}
         />

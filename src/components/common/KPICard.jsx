@@ -3,8 +3,8 @@ import { ArrowUp, ArrowDown } from 'lucide-react';
 import Card from './Card';
 
 // eslint-disable-next-line no-unused-vars
-const KPICard = ({ title, value, change, icon: Icon, color, trend }) => (
-  <Card className="overflow-hidden">
+const KPICard = ({ title, value, change, icon: Icon, color, trend, hover = true }) => (
+  <Card className="overflow-hidden" hover={hover}>
     <div className="flex items-center justify-between">
       <div>
         <p className="text-sm font-medium text-textSecondary mb-1">{title}</p>

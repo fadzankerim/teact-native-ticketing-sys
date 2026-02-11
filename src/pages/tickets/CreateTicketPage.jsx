@@ -107,7 +107,7 @@ const CreateTicketPage = () => {
       <div className="flex items-center space-x-4">
         <button
           onClick={() => navigate('/tickets')}
-          className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+          className="p-2 hover:bg-primary/10 rounded-lg transition-colors"
         >
           <ArrowLeft className="w-5 h-5 text-textSecondary" />
         </button>
